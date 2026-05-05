@@ -11,12 +11,12 @@ const linkDot = document.getElementById('link-dot');
 let phase = 'boot'; // 'boot' | 'login' | 'shell'
 let loginAttempts = 0;
 let helpUsed = false;
-const CORRECT_USER = 'OPERATOR';
-const CORRECT_PASS = 'ARK-7743';
+const CORRECT_USER = '71';
+const CORRECT_PASS = 'PANTHEON';
 
 // ─── Relay key state ──────────────────────────────────────────────────────────
-const RELAY_KEYS = ['[KEY1HERE]', '[KEY2HERE]', '[KEY3HERE]'];
-const relayedKeys = [];  // tracks which keys have been submitted
+const RELAY_KEYS = ['LEN', 'NIGHTFALL', 'ARK7743'];
+const relayedKeys = []; 
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function addLine(text = '', cls = '') {
@@ -60,7 +60,7 @@ async function runBoot() {
   phase = 'boot';
   await delay(300);
 
-  addLine('ARK SYSTEM v0.3.1 — DISTRIBUTED RECOVERY KERNEL', 'header');
+  addLine('ARK SYSTEM v0.3.1 — RECOVERY KERNEL', 'header');
   sep();
   await delay(500);
 
@@ -248,18 +248,9 @@ async function anomalyContained() {
 
   addLine('ANOMALY CONTAINED.', 'header');
   await delay(400);
-  addLine('  All nodes nominal. Vault secured.', '');
+  addLine('  All nodes nominal.', '');
   await delay(300);
   addLine('  ARK system integrity: 100%', 'bright');
-  gap();
-  await delay(500);
-
-  // The reward message — put whatever you want players to find here
-  addLine('  Decrypting recovered payload...', 'dim');
-  await delay(1200);
-  sep();
-  addLine('  [[ REWARD / NEXT STEP GOES HERE ]]', 'bright');
-  sep();
   gap();
 }
 
@@ -274,7 +265,6 @@ const COMMANDS = {
       ['relay', 'Relay a recovered key fragment — RELAY [key]'],
       ['logs', 'Show recent system logs'],
       ['integrity', 'Run integrity scan'],
-      ['whoami', 'Display current operator info'],
       ['clear', 'Clear terminal'],
       ['help', 'Show this help'],
     ];
@@ -283,7 +273,6 @@ const COMMANDS = {
     }
     gap();
 
-    // Creepy ghost message — first time only
     if (helpUsed) return;
     helpUsed = true;
     await delay(2500);
@@ -360,13 +349,12 @@ const COMMANDS = {
       return;
     }
 
-    // Valid key accepted
     relayedKeys.push(key);
     const count = relayedKeys.length;
 
     addLine(`  Transmitting fragment ${count} of 3...`, 'dim');
     await delay(800);
-    addLine(`  Fragment verified. ✓`, '');
+    addLine(`  Fragment verified. Node recovery contributed.`, '');
     await delay(300);
 
     if (count === 1) {
@@ -374,7 +362,7 @@ const COMMANDS = {
       await delay(500);
       addLine('  Handshake partial — 2 more fragments required.', 'warn');
       addLine(`  Integrity restoring: 42% → 61%`, 'warn');
-      // update topbar
+
       document.querySelector('#topbar .status-row span:nth-child(2)').innerHTML =
         '<span class="dot amber"></span> INTEGRITY: 61%';
 
@@ -387,7 +375,7 @@ const COMMANDS = {
         '<span class="dot amber"></span> INTEGRITY: 79%';
 
     } else if (count === 3) {
-      // Final key — full restoration sequence
+
       await anomalyContained();
     }
 
@@ -417,16 +405,12 @@ const COMMANDS = {
     addLine('[ RECENT LOGS ] — last 10 entries', 'bright');
     await delay(150);
     const logs = [
-      ['2024-03-14 02:11:03', 'Node 3 last heartbeat received', ''],
-      ['2024-03-14 02:11:47', 'Node 3 timeout — retrying...', 'warn'],
-      ['2024-03-14 02:12:00', 'Node 3 UNREACHABLE — quorum lost', 'err'],
-      ['2024-03-14 02:12:01', 'Integrity degraded: 100% → 42%', 'err'],
-      ['2024-03-14 02:15:00', 'Failsafe engaged — vault locked', 'warn'],
-      ['2024-03-28 09:44:12', 'Unauthorized access attempt (x3)', 'err'],
-      ['2024-03-28 09:45:01', 'Intrusion countermeasure deployed', 'warn'],
-      ['2024-03-29 16:02:57', 'Recovery protocol initiated', 'dim'],
-      ['2024-03-29 16:03:44', 'Recovery FAILED — node unreachable', 'err'],
-      ['2024-03-29 16:04:00', 'Awaiting operator intervention', 'warn'],
+      ['2008-03-14 02:11:03', 'WARNING: Node 3 heartbeat desynchronised', 'err'],
+      ['2008-03-14 02:11:47', 'Host integrity check returning inconsistent values', 'warn'],
+      ['2008-03-14 02:12:00', 'Outbound signal lost during quorum verification', 'err'],
+      ['2026-04-26 08:18:01', 'Access layer breached by unknown operator signature', 'err'],
+      ['2008-03-28 09:44:12', 'Memory index corrupted — identity fragments detected', 'err'],
+      ['2008-03-29 16:02:57', 'Identity loop detected in system core routing', 'warn'],
     ];
     for (const [ts, msg, cls] of logs) {
       addLine(`  ${ts}  ${msg}`, cls || 'dim');
@@ -453,9 +437,9 @@ const COMMANDS = {
 
   whoami: async () => {
     gap();
-    addLine('  Operator   : OPERATOR', 'bright');
-    addLine('  Clearance  : LEVEL 3 — RECOVERY OPS', '');
-    addLine('  Session    : 7f2a91c4-bb03-4e1a', 'dim');
+    addLine('  Operator   : EMPLOYEE 71', 'bright');
+    addLine('  Clearance  : []', '');
+    addLine('  Session    : F8GhvGqs4W', 'dim');
     addLine('  Node       : 192.168.0.11', 'dim');
     gap();
   },
