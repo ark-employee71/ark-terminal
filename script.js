@@ -12,17 +12,15 @@ let phase = 'boot'; // 'boot' | 'login' | 'shell'
 let loginAttempts = 0;
 let helpUsed = false;
 
-// ─── Hashed credentials (SHA-256 — plain text values are not stored here) ────
 const H_USER = '7f2253d7e228b22a08bda1f09c516f6fead81df6536eb02fa991a34bb38d9be8';
 const H_PASS = '9a7d0627500e0ce9be45a3e077c22253b7122a524ffd4d62f650cf8cde596885';
 
-// ─── Relay key state ──────────────────────────────────────────────────────────
 const H_RELAY_KEYS = [
   'ea6a8bc051ff45d6d851abbfa6227e049df9ac5a17a9b070bfb3504f83aa8ac3',
   'c38f95d861d6d5a5c36ecbe913be5cc9f9d894cf55499cf3c6b6d1302b167992',
   '422bf520c52fac03620715f4ad282d3c5ff84eaf11662f5a7d987c0c0c23b365',
 ];
-const relayedHashes = []; // stores hashes of accepted keys
+const relayedHashes = [];
 
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
