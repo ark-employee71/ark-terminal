@@ -1,1 +1,41 @@
-<p>yo</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>A.R.K Terminal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="terminal">
+    <div id="topbar">
+      <div class="brand">ARK TERMINAL</div>
+      <div class="status-row">
+        <span><span class="dot white" id="node3-dot"></span> NODE 3: MISSING</span>
+        <span><span class="dot amber"></span> INTEGRITY: 42%</span>
+        <span><span class="dot" id="link-dot"></span> LINK: <span id="link-status">OFFLINE</span></span>
+      </div>
+    </div>
+
+    <div id="output"></div>
+
+    <div id="login-panel">
+      <div>
+        <div class="field-label">OPERATOR ID</div>
+        <input id="login-user" type="text" autocomplete="off" spellcheck="false" maxlength="32" />
+      </div>
+      <div>
+        <div class="field-label">ACCESS KEY</div>
+        <input id="login-pass" type="password" autocomplete="off" maxlength="32" />
+      </div>
+      <div class="submit-hint">[ ENTER to authenticate ]</div>
+    </div>
+
+    <div id="input-area">
+      <span id="prompt-label">ark@node1 ~$</span>
+      <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
