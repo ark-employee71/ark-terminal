@@ -12,7 +12,7 @@ let phase = 'boot'; // 'boot' | 'login' | 'shell'
 let loginAttempts = 0;
 let helpUsed = false;
 const CORRECT_USER = '71';
-const CORRECT_PASS = 'PANTHEON';
+const CORRECT_PASS = 'ITALY';
 
 // ─── Relay key state ──────────────────────────────────────────────────────────
 const RELAY_KEYS = ['LEN', 'NIGHTFALL', 'ARK7743'];
